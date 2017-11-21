@@ -1,19 +1,43 @@
-# Welcome!
+# std::optional
 
-This C++ template lets you get started quickly with a simple one-page playground.
+- Is not going to dynamic allocation on it's own
+- optional set the value and call destructor when exit.
+- not supported by constexpr
 
-```C++ runnable
-#include <iostream>
+### example
+```
+include <optional>
 
-using namespace std;
-
-int main() 
-{
-    cout << "Hello, World!";
-    return 0;
+int main()
+{	
+	std::optional<int> o{13}; // if init return 13
+	return o.value_or(2); // else return 2
 }
 ```
 
-# Advanced usage
+### more example
+```C++ runnable
+#include <string>	
+#include <iostream>
+#include <optional>
 
-If you want a more complex example (external libraries, viewers...), use the [Advanced C++ template](https://tech.io/select-repo/598)
+std::optional<std::string> create(bool b) {
+  if (b)
+    return "Godzilla";
+  return {};
+}
+
+auto create2(bool b) {
+  return b ? std::optional<std::string>{"Godzilla"} : std::nullopt;
+}
+
+int main()
+{
+  std::cout << "create(false) returned"
+    		<< create(false).value_or("empty") << '\n';
+  if (auto str = create2(true)) {
+    std::cout << "create2(true) returned " << *str << '\n';
+  }
+}	
+
+```
