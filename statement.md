@@ -41,3 +41,8 @@ int main()
 }	
 
 ```
+### Output
+```
+create(false) returned empty
+create2(true) returned Godzilla
+```
